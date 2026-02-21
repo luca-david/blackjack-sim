@@ -33,6 +33,9 @@ int main() {
 
 		// let the player choose if they want to draw another card(input from kb)
 		p1.displayHand();
+
+		p1.setValuesForCards();
+		p1.setRunningTotal();
 		int runningTotal = p1.getRunningTotal();
 		cout << endl << "+Your running total+   " << runningTotal;
 		cout << endl << endl << "Controls: " << "    " << "H - hit" << "    " << "S - stand";
@@ -41,13 +44,24 @@ int main() {
 
 		if (input == 'h' || input == 'H') {
 			p1.drawFromDeck(d1);
+			
+			p1.setValuesForCards(); 
+			p1.setRunningTotal(); 
+			
 			p1.displayHand();
+
 			runningTotal = p1.getRunningTotal();
 			cout << endl << "+Your running total+   " << runningTotal;
 		}
 		else if (input == 's' || input == 'S') {
-			Sleep(1000);
-			cout << endl << "Standing...";
+			cout << endl << "Standing";
+			Sleep(500);
+			cout << ".";
+			Sleep(500);
+			cout << ".";
+			Sleep(500);
+			cout << ".";
+			Sleep(500);
 		}
 		else {
 			cout << endl << "Unknown command";

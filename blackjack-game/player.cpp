@@ -26,6 +26,12 @@ void Player::drawFromDeck(Deck& deck) {
 	// draw a card at the new index
 	this->playerCards[this->noOfCards - 1] = deck.drawCard();
 
+	// modify values for cards array
+	this->setValuesForCards();
+
+	// modify running total
+	this->setRunningTotal();
+
 	//std::cout << std::endl << "Player drew the following new card: ";
 	//std::cout << cardToString(this->playerCards[this->noOfCards - 1]);
 
@@ -33,29 +39,66 @@ void Player::drawFromDeck(Deck& deck) {
 	//return deck.drawCard(); // returns card drawn from deck
 }
 
-int* Player::getValuesForCards() { // sets and returns the current values of the current cards
-	delete[] this->valuesForCards;
+int* Player::getValuesForCards() { // returns the current values of the current cards
 
-	this->valuesForCards = new int[this->noOfCards];
 	int* copy = new int[this->noOfCards]; // for deep copy
 
 	for (int i = 0; i < this->noOfCards; i++) {
-		copy[i] = stringToNumber(this->playerCards[i]);
+		copy[i] = this->valuesForCards[i];
 	}
 
 	return copy;
 }
 
-int Player::getRunningTotal() {
+void Player::setValuesForCards() { // value of each card gets stored in array
+	delete[] this->valuesForCards;
+	
+	this->valuesForCards = new int[this->noOfCards];
+
 	for (int i = 0; i < this->noOfCards; i++) {
-		this->runningTotal += this->getValuesForCards()[i];
+		this->valuesForCards[i] = stringToNumber(this->playerCards[i]);
 	}
 
+}
+
+int Player::getRunningTotal() {
+	
 	return this->runningTotal;
 }
 
+//void Player::setRunningTotal() { // sum up all numbers in valuesForCards
+//	
+//	for (int i = 0; i < this->noOfCards; i++) {
+//		this->runningTotal += this->getValuesForCards()[i];
+//	}
+//}
+void Player::setRunningTotal() { // sum up all numbers in valuesForCards
+	
+	this->runningTotal = 0;
+
+	bool hasAce = false;
+	int indexOfAce = 0;
+	for (int i = 0; i < this->noOfCards; i++) {
+		if (rankToString(this->playerCards[i].getRank()) == "Ace") {
+			hasAce = true;
+			indexOfAce = i;
+		}
+		this->runningTotal += this->valuesForCards[i];
+	}
+
+	// if player has an ace and has surpassed 21 the ace will have value 1
+
+	if (hasAce == true && this->runningTotal > 21) {
+		this->runningTotal = 0; // reset total 
+		this->valuesForCards[indexOfAce] = 1; // modify value of ace 
+		for (int i = 0; i < this->noOfCards; i++) {
+			this->runningTotal += this->valuesForCards[i]; // recalculate total
+		}
+	}
+}
+
 bool Player::isUnder21() {
-	if (this->runningTotal < 21) {
+	if (this->runningTotal <= 21) {
 		return true;
 	}
 	else {

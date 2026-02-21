@@ -4,7 +4,7 @@
 
 using namespace std;
 
-string rankToString(Rank& rankOfCard) {
+string rankToString(const Rank& rankOfCard) {
 	switch (rankOfCard) {
 	case TWO: return "Two";
 	case THREE: return "Three";
