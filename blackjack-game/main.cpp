@@ -18,6 +18,14 @@ int main() {
 
 	bool gameover = false;
 	char input;
+	
+	//Deck testDeck;
+	//Card testCard = testDeck.drawCard();
+	//cout << endl << "BEGIN testing";
+	//displayCard(testCard);
+	//displayAsciiCard(testCard); // fix this function
+	//cout << endl << "END testing";
+
 
 	while (gameover != true) {
 		// start of the game
@@ -30,9 +38,16 @@ int main() {
 		dealer.drawFromDeck(d1);
 		dealer.drawFromDeck(d1);
 		dealer.displayFirstCard();
+		for (int i = 0; i < dealer.getNoOfCards() - 1; i++) {
+			displayAsciiCard(dealer.getCards()[i]);
+		}
 
 		// let the player choose if they want to draw another card(input from kb)
 		p1.displayHand();
+		for (int i = 0; i < p1.getNoOfCards(); i++) {
+			displayAsciiCard(p1.getCards()[i]);
+		}
+		
 
 		p1.setValuesForCards();
 		p1.setRunningTotal();
@@ -49,6 +64,9 @@ int main() {
 			p1.setRunningTotal(); 
 			
 			p1.displayHand();
+			for (int i = 0; i < p1.getNoOfCards(); i++) {
+				displayAsciiCard(p1.getCards()[i]);
+			}
 
 			runningTotal = p1.getRunningTotal();
 			cout << endl << "+Your running total+   " << runningTotal;
@@ -68,30 +86,30 @@ int main() {
 		}
 
 		if (p1.isUnder21() == false) {
-			cout << endl << "You lose!";
+			cout << endl << endl << "You lose!";
 			cout << endl << "Reason: Went over the limit of 21";
 			gameover = 1;
 		}
 		else if (dealer.isUnder21() == false) {
-			cout << endl << "You win!";
+			cout << endl << endl << "You win!";
 			cout << endl << "Reason: Dealer went over the limit of 21";
 			gameover = 1;
 		}
 
 		else if (p1.getRunningTotal() < dealer.getRunningTotal()) {
-			cout << endl << "You lose!";
+			cout << endl << endl << "You lose!";
 			cout << endl << "Reason: Dealer has a greater running total";
 			gameover = 1;
 		}
 
 		else if (p1.getRunningTotal() > dealer.getRunningTotal()) {
-			cout << endl << "You win!";
+			cout << endl << endl << "You win!";
 			cout << endl << "Reason: You have a higher running total than the dealer";
 			gameover = 1;
 		}
 
 		else if (p1.getRunningTotal() == dealer.getRunningTotal()) {
-			cout << endl << "It's a tie!";
+			cout << endl << endl << "It's a tie!";
 			cout << endl << "Same running total between player and dealer";
 			gameover = 1;
 		}

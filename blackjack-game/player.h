@@ -10,6 +10,8 @@ class Player {
 
 public:
 	void drawFromDeck(Deck& deck);
+	Card* getCards();
+	int getNoOfCards();
 	int* getValuesForCards();
 	void setValuesForCards();
 	int getRunningTotal();

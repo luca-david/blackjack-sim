@@ -8,11 +8,11 @@ enum Symbol {
 };
 
 enum Rank {
-	TWO = 0, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
+	ONE = 0, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
 };
 
 class Card {
-	Rank rank = Rank::TWO;
+	Rank rank = Rank::ONE;
 	Symbol symbol = Symbol::HEARTS;
 	
 

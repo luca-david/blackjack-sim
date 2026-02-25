@@ -39,6 +39,21 @@ void Player::drawFromDeck(Deck& deck) {
 	//return deck.drawCard(); // returns card drawn from deck
 }
 
+Card* Player::getCards() {
+	Card* copy = new Card[this->noOfCards];
+
+	for (int i = 0; i < this->noOfCards; i++) {
+		copy[i] = this->playerCards[i];
+	}
+
+	return copy;
+}
+
+int Player::getNoOfCards() {
+	return this->noOfCards;
+}
+
+
 int* Player::getValuesForCards() { // returns the current values of the current cards
 
 	int* copy = new int[this->noOfCards]; // for deep copy
@@ -125,5 +140,5 @@ void Player::displayHand() {
 void Player::displayFirstCard() {
 	std::cout << std::endl << "Dealer's first card: ";
 	displayCard(this->playerCards[0]);
-	std::cout << std::endl;
+	//std::cout << std::endl;
 }
