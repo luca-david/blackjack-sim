@@ -61,6 +61,8 @@ int main() {
 			cout << endl << "Your choice: ";
 			cin >> input;
 
+			
+
 			if (input == 'h' || input == 'H') {
 				cin.get(); // get rid of \n character
 				
@@ -90,7 +92,31 @@ int main() {
 				Sleep(500);
 			}
 			else {
+				cin.get(); // get rid of \n character;
 				cout << endl << "Unknown command";
+			}
+
+			while (p1.isUnder21() == true) {
+				cout << endl << endl << "Hit or Stand? H/S   ->     ";
+				cin >> input;
+				if (input == 'H' || input == 'h') {
+					cin.get();
+					p1.drawFromDeck(d1);
+
+					p1.setValuesForCards();
+					p1.setRunningTotal();
+
+					p1.displayHand();
+					for (int i = 0; i < p1.getNoOfCards(); i++) {
+						displayAsciiCard(p1.getCards()[i]);
+					}
+
+					runningTotal = p1.getRunningTotal();
+					cout << endl << endl << ">>>  Your running total: " << runningTotal << "  <<<";
+				}
+				else {
+					break;
+				}
 			}
 
 			if (p1.isUnder21() == false) {
@@ -145,30 +171,18 @@ int main() {
 		else if (input == 'N' || input == 'n') {
 			cin.get();
 			cout << endl << "See you later!";
+			break;
 		}
 		else {
 			cin.get();
 			cout << endl << "Invalid input, but the game will close";
+			break;
 		}
 
 	}
-	
-	
-	//cout << endl << "Value of each current card: ";		// VALUE FOR EACH CARD, INDEPENDENTLY
-	//for (int i = 0; i < 3; i++) {
-	//	cout << p1.getValuesForCards()[i] << " ";
-	//}
 
-	//cout << endl << "Current total of cards: " << p1.getRunningTotal(); // VALUE OF ALL CARDS, TOTAL
-	
-
-	//cout << endl << endl;
-	//p1.displayHand();
-
-	
-	//cout << endl << endl << "Press ENTER to exit.";
-	//cin.get();
-
+	cout << endl;
+	system("pause");
 	cout << endl;
 	return 0;
 }
