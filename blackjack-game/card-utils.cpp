@@ -66,7 +66,7 @@ string cardToString(const Card& card) {
 }
 
 void displayCard(const Card& card) {
-	cout << endl << "->" << cardToString(card);
+	cout << endl << "/// " << cardToString(card) << " \\\\\\";
 }
 
 int stringToNumber(const Card& card) {

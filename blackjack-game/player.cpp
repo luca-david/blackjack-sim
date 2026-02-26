@@ -131,14 +131,18 @@ Player::~Player() {
 }
 
 void Player::displayHand() {
-	std::cout << std::endl << "Current hand: ";
+	std::cout << std::endl << std::endl;
+	std::cout << "------------------------------------" << std::endl;
+	std::cout << "-<>--<>--<>--<>--<>--<>--<>--<>--<>-" << std::endl;
+	std::cout << "------------------------------------" << std::endl;
+	std::cout << std::endl << "Your Current Hand: ";
 	for (int i = 0; i < this->noOfCards; i++) {
 		displayCard(this->playerCards[i]);
 	}
+	
 }
 
 void Player::displayFirstCard() {
-	std::cout << std::endl << "Dealer's first card: ";
+	std::cout << "Dealer's first card: ";
 	displayCard(this->playerCards[0]);
-	//std::cout << std::endl;
 }
